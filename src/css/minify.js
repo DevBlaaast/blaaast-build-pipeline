@@ -35,7 +35,7 @@ module.exports = function (gulp, options) {
     return gulp.src('./scss/main.scss')
       .pipe( sass() )
       .pipe( uncss({
-        html: 'pages/**/*.hbs',
+        html: options.htmlPages,
         // To make Bootstrap work
         ignore: uncssOpts
       }))

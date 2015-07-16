@@ -25,7 +25,7 @@ module.exports = function (gulp, options) {
       'Cache-Control': 'max-age=315360000, no-transform, public'
     };
 
-    gulp.src(options.webpages)
+    gulp.src(options.htmlPages)
       .pipe(awspublish.gzip({ ext: '.gz' }))
       .pipe(publisher.publish(headers, {
         // Always update index.html
