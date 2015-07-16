@@ -5,7 +5,7 @@ var parallelize = require('concurrent-transform');
 module.exports = function (gulp, options) {
 
   // Deploy to S3
-  gulp.task('publish', ['patch'], function() {
+  gulp.task('publish', function() {
 
     // create a new publisher using S3 options
     var publisher = awspublish.create({
