@@ -2,7 +2,7 @@ var rename = require('gulp-rename');
 var awspublish = require('gulp-awspublish');
 var parallelize = require('concurrent-transform');
 
-module.exports = function (gulp) {
+module.exports = function (gulp, options) {
 
   // Deploy to beta
   gulp.task('publish-beta', function() {
@@ -25,7 +25,7 @@ module.exports = function (gulp) {
       'Cache-Control': 'max-age=315360000, no-transform, public'
     };
 
-    gulp.src(htmlPages)
+    gulp.src(options.webpages)
       .pipe(awspublish.gzip({ ext: '.gz' }))
       .pipe(publisher.publish(headers, {
         // Always update index.html
