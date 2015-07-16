@@ -1,5 +1,6 @@
 var watch = require('gulp-watch');
 var connect = require('gulp-connect');
+var del = require('del');
 var git = require('gulp-git');
 var bump = require('gulp-bump');
 var filter = require('gulp-filter');
@@ -84,9 +85,10 @@ module.exports = function (gulp, options) {
     Clean before publish
 
   */
-  gulp.task('clean', function () {
-    return gulp.src('./build', {read: false})
-      .pipe(clean());
+  gulp.task('clean', function (cb) {
+    del([
+      './build/**/*'
+    ], cb);
   });
 
 
