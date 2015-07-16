@@ -4,6 +4,8 @@ var concat = require('gulp-concat');
 var babelify = require('babelify');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
+var source = require('vinyl-source-stream');
+var addsrc = require('gulp-add-src');
 var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 

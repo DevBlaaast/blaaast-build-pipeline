@@ -2,7 +2,7 @@ var rename = require('gulp-rename');
 var awspublish = require('gulp-awspublish');
 var parallelize = require('concurrent-transform');
 
-module.exports = function (gulp) {
+module.exports = function (gulp, options) {
 
   // Deploy to S3
   gulp.task('publish', ['patch'], function() {
@@ -26,7 +26,7 @@ module.exports = function (gulp) {
       'Cache-Control': 'max-age=315360000, no-transform, public'
     };
 
-    htmlPages.forEach(function (page) {
+    options.htmlPages.forEach(function (page) {
       return gulp.src(page)
         .pipe(rename(function (path) {
           if (page.split('/')[1] !== 'index.html') {

@@ -3,18 +3,24 @@ var handlebars = require('gulp-compile-handlebars');
 var data = require('gulp-data');
 var revReplace = require('gulp-rev-replace');
 
-module.exports = function (gulp) {
+// De-caching for Data files
+function requireUncached( $module ) {
+  delete require.cache[require.resolve( $module )];
+  return require( $module );
+}
+
+module.exports = function (gulp, options) {
 
   gulp.task('html-deploy', ['compress-resources'], function() {
 
     var manifest = gulp.src('./build/rev-manifest.json');
     var webpages = options.webpages;
     var partials = options.partials;
-    var data = options.data;
+    var dataPath = options.dataPath;
 
     return gulp.src(webpages)
       .pipe(data(function(file) {
-        return data;
+        return requireUncached(dataPath);
       }))
       .pipe(handlebars({}, {
         batch : partials
