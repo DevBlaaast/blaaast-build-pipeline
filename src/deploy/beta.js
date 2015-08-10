@@ -7,10 +7,12 @@ module.exports = function (gulp, options) {
   // Deploy to beta
   gulp.task('publish-beta', function() {
 
+    console.log('Deploying to beta in bucket ', options.bucketBeta);
+
     // create a new publisher using S3 options
     var publisher = awspublish.create({
       params: {
-        Bucket: 'lehack40-beta'
+        Bucket: options.bucketBeta
       },
       accessKeyId: process.env.AWS_STATIC_HOST_KEY,
       secretAccessKey: process.env.AWS_STATIC_HOST_SECRET,
@@ -25,13 +27,20 @@ module.exports = function (gulp, options) {
       'Cache-Control': 'max-age=315360000, no-transform, public'
     };
 
-    gulp.src(options.htmlPages)
-      .pipe(awspublish.gzip({ ext: '.gz' }))
-      .pipe(publisher.publish(headers, {
-        // Always update index.html
-        force: true
-      }))
-      .pipe(awspublish.reporter());
+    options.htmlPages.forEach(function (page) {
+      return gulp.src(page)
+        .pipe(rename(function (path) {
+          if (page.split('/')[1] !== 'index.html') {
+            path.dirname = page.split('/')[1];
+          }
+        }))
+        .pipe(awspublish.gzip({ ext: '.gz' }))
+        .pipe(publisher.publish(headers, {
+          // Always update index.html
+          force: true
+        }))
+        .pipe(awspublish.reporter());
+    });
 
     gulp.src('./fonts/**')
       .pipe(rename(function (path) {

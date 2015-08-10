@@ -7,10 +7,12 @@ module.exports = function (gulp, options) {
   // Deploy to S3
   gulp.task('publish', function() {
 
+    console.log('Deploying to production in bucket ', options.bucketProd);
+
     // create a new publisher using S3 options
     var publisher = awspublish.create({
       params: {
-        Bucket: 'www.lehack40.fr'
+        Bucket: options.bucketProd
       },
       accessKeyId: process.env.AWS_STATIC_HOST_KEY,
       secretAccessKey: process.env.AWS_STATIC_HOST_SECRET,

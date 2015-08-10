@@ -23,7 +23,7 @@ module.exports = function (gulp, options) {
         return requireUncached(dataPath);
       }))
       .pipe(handlebars({}, {
-        batch : partials
+        batch: partials
       }))
       // .pipe( rename('index.html'))
       .pipe(rename(function (path) {
