@@ -80,10 +80,10 @@ module.exports = function (gulp, options) {
     gulp.start('html-deploy');
   });
 
-  gulp.task('deploy-cms-beta', ['html-deploy'], function() {
+  gulp.task('deploy-cms-beta', ['html-deploy-cms'], function() {
     gulp.start('publish-beta');
   });
-  gulp.task('deploy-cms-prod', ['html-deploy'], function() {
+  gulp.task('deploy-cms-prod', ['html-deploy-cms'], function() {
     gulp.start('publish');
   });
 
