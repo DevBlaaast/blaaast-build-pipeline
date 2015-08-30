@@ -12,6 +12,8 @@ module.exports = function (gulp, options) {
     var manifest = gulp.src('./build/rev-manifest.json');
 
     var uncssOpts = [
+      /^\.js/,
+      /velocity/,
       /(#|\.)fancybox(\-[a-zA-Z]+)?/,
       // Bootstrap selectors added via JS
       /\w\.in/,
@@ -29,7 +31,9 @@ module.exports = function (gulp, options) {
       /(#|\.)(open)/,
       // currently only in a IE conditional, so uncss doesn't see it
       '.close',
-      '.alert-dismissible'
+      '.alert-dismissible',
+      // Font awesome
+      /^\.fa/
     ].concat(options.uncssOpts);
 
     return gulp.src('./scss/main.scss')

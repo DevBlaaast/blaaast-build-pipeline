@@ -80,6 +80,13 @@ module.exports = function (gulp, options) {
     gulp.start('html-deploy');
   });
 
+  gulp.task('deploy-cms-beta', ['html-deploy'], function() {
+    gulp.start('publish-beta');
+  });
+  gulp.task('deploy-cms-prod', ['html-deploy'], function() {
+    gulp.start('publish');
+  });
+
 
   /**
     Clean before publish
@@ -99,7 +106,7 @@ module.exports = function (gulp, options) {
   gulp.task('watch', function() {
     gulp.watch('./scss/**/*.scss', ['css']);
     gulp.watch('./js/**/*.js', ['js']);
-    gulp.watch('./**/*.hbs', ['html']);
+    gulp.watch('./pages/**/*.{json,hbs}', ['html']);
   });
 
 

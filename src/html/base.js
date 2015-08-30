@@ -12,18 +12,29 @@ function requireUncached( $module ) {
 
 module.exports = function (gulp, options) {
 
+  /**
+    To be extended to accept options.hbsHelpers
+  */
+  var hbsHelpers = {
+    json : function(context){
+      return JSON.stringify(context);
+    }
+  };
+
   // HTML reload on changes
   gulp.task('html', function() {
 
     var webpages = options.webpages;
     var partials = options.partials;
+    var dataPath = options.dataPath;
 
     return gulp.src(webpages)
       .pipe(data(function(file) {
-        return requireUncached(options.dataPath);
+        return requireUncached(dataPath);
       }))
       .pipe(handlebars({}, {
-        batch: partials
+        batch: partials,
+        helpers : hbsHelpers
       }))
       .pipe(rename(function (path) {
         var s;
@@ -40,3 +51,5 @@ module.exports = function (gulp, options) {
   });
 
 }
+
+// docker exec -i -t  bash
