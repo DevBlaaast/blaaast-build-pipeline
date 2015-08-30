@@ -1,7 +1,11 @@
-var sass = require('gulp-sass');
+// Exclude gulp-sass or build breaks on the CMS
+if (process.env.NODE_ENV !== 'production') {
+  var sass = require('gulp-sass');
+  var uncss = require('gulp-uncss');
+}
+
 var minifyCSS = require('gulp-minify-css');
 var plumber = require('gulp-plumber');
-var uncss = require('gulp-uncss');
 var autoprefixer = require('gulp-autoprefixer');
 var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');

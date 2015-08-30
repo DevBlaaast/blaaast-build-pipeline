@@ -1,4 +1,8 @@
-var sass = require('gulp-sass');
+// Exclude gulp-sass or build breaks on the CMS
+if (process.env.NODE_ENV !== 'production') {
+  var sass = require('gulp-sass');
+}
+
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');

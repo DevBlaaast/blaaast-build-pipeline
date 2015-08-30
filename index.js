@@ -107,6 +107,7 @@ module.exports = function (gulp, options) {
     gulp.watch('./scss/**/*.scss', ['css']);
     gulp.watch('./js/**/*.js', ['js']);
     gulp.watch('./pages/**/*.{json,hbs}', ['html']);
+    gulp.watch('./img/**/*', ['img']);
   });
 
 
