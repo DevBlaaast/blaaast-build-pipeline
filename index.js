@@ -14,7 +14,6 @@ module.exports = function (gulp, options) {
 
   /**
     Import every tasks
-
   */
   require('./src')(gulp, options);
 
@@ -44,7 +43,6 @@ module.exports = function (gulp, options) {
 
   /**
     Basic http server
-
   */
   gulp.task('connect', function() {
     return connect.server({
@@ -57,7 +55,6 @@ module.exports = function (gulp, options) {
 
   /**
     Default task
-
   */
   gulp.task('default', ['connect', 'watch'], function() {
     gulp.start('html', 'css', 'js', 'img');
@@ -66,7 +63,6 @@ module.exports = function (gulp, options) {
 
   /**
     Compress static resources
-
   */
   gulp.task('compress-images', ['img-deploy']);
   gulp.task('compress-resources', ['uglify', 'minify-css']);
@@ -74,7 +70,6 @@ module.exports = function (gulp, options) {
 
   /**
     Deploy task
-
   */
   gulp.task('deploy', ['compress-images'], function() {
     gulp.start('html-deploy');
@@ -90,7 +85,6 @@ module.exports = function (gulp, options) {
 
   /**
     Clean before publish
-
   */
   gulp.task('clean', function (cb) {
     del([
@@ -101,7 +95,6 @@ module.exports = function (gulp, options) {
 
   /**
     Watch task
-
   */
   gulp.task('watch', function() {
     gulp.watch('./scss/**/*.scss', ['css']);
@@ -113,7 +106,6 @@ module.exports = function (gulp, options) {
 
   /**
     Version control
-
   */
   gulp.task('patch', function() { return inc('patch'); })
   gulp.task('feature', function() { return inc('minor'); })

@@ -9,6 +9,9 @@ module.exports = function (gulp, options) {
 
     console.log('Deploying to beta in bucket ', options.bucketBeta);
 
+    const i18n = options.i18n;
+    const hasi18n = i18n && i18n.length;
+
     // create a new publisher using S3 options
     var publisher = awspublish.create({
       params: {
@@ -28,12 +31,12 @@ module.exports = function (gulp, options) {
     };
 
     options.htmlPages.forEach(function (page) {
-      return gulp.src(page)
-        .pipe(rename(function (path) {
-          if (page.split('/')[1] !== 'index.html') {
-            path.dirname = page.split('/')[1];
-          }
-        }))
+      return gulp.src(page, { base: process.cwd() })
+        // .pipe(rename(function (path) {
+        //   if (page.split('/')[1] !== 'index.html') {
+        //     path.dirname = page.split('/')[1];
+        //   }
+        // }))
         .pipe(awspublish.gzip({ ext: '.gz' }))
         .pipe(publisher.publish(headers, {
           // Always update index.html
