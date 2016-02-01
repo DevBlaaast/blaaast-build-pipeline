@@ -23,6 +23,16 @@ module.exports = function (gulp, options) {
     }
   };
 
+  gulp.task('tmp-replace', function () {
+    const manifest = gulp.src('./build/rev-manifest.json');
+    return gulp.src([
+      'en/community/index.html',
+      'en/index.html'
+    ], { base: process.cwd() })
+      .pipe( revReplace({ manifest: manifest }) )
+      .pipe( gulp.dest('./'));
+  });
+
   // HTML reload on changes
   gulp.task('html-deploy', ['compress-resources'], function() {
 
@@ -60,7 +70,7 @@ module.exports = function (gulp, options) {
     };
 
     return gulp.src(webpages, { base: process.cwd() })
-      .pipe( handlebars(mergedUncachedData, { batch, helpers }) )
+      .pipe( handlebars(requireUncached(dataPath), { batch, helpers }) )
       .pipe( rename(i18nUtils.getDestDir) )
       .pipe( gulp.dest('./'))
       .pipe( revReplace({ manifest: manifest }) )

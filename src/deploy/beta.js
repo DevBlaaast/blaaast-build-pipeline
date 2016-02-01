@@ -54,6 +54,13 @@ module.exports = function (gulp, options) {
       .pipe(publisher.cache())
       .pipe(awspublish.reporter());
 
+    // Favicon upload
+    gulp.src(['./*.png', './*.ico'])
+      .pipe(awspublish.gzip())
+      .pipe(parallelize(publisher.publish(headersStatics), 50))
+      .pipe(publisher.cache())
+      .pipe(awspublish.reporter());
+
     return gulp.src('./build/**')
       .pipe(rename(function (path) {
         path.dirname = 'build/' + path.dirname;

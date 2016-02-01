@@ -11,7 +11,7 @@ var concat = require('gulp-concat');
 module.exports = function (gulp) {
 
   gulp.task('js', function() {
-    browserify({
+    return browserify({
       entries: './js/main.js',
       debug: true
     })

@@ -60,7 +60,7 @@ module.exports = function (gulp, options) {
     };
 
     return gulp.src(webpages, { base: process.cwd() })
-      .pipe( handlebars(mergedUncachedData, { batch, helpers }) )
+      .pipe( handlebars(requireUncached(options.dataPath), { batch, helpers }) )
       .pipe( rename(i18nUtils.getDestDir) )
       .pipe( gulp.dest('./') );
   });
