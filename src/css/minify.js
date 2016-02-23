@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
   var uncss = require('gulp-uncss');
 }
 
-var minifyCSS = require('gulp-minify-css');
+var minifyCSS = require('gulp-cssnano');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var rev = require('gulp-rev');

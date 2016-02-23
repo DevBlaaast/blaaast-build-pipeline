@@ -8,6 +8,9 @@ const connect = require('gulp-connect');
 const path = require('path');
 const _ = require('lodash');
 
+// TODO accept options.helpers from project
+const helpers = require('./helpers');
+
 const i18nUtils = require('./i18n');
 
 // De-caching for Data files
@@ -18,13 +21,6 @@ function requireUncached( requiredModule ) {
 
 
 module.exports = function (gulp, options) {
-
-  // To be extended to accept options.hbsHelpers
-  var helpers = {
-    json: function(context){
-      return JSON.stringify(context);
-    }
-  };
 
   // HTML reload on changes
   gulp.task('html', function() {

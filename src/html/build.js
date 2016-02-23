@@ -1,8 +1,13 @@
+'use strict';
+
 const rename = require('gulp-rename');
 const handlebars = require('gulp-compile-handlebars');
 const data = require('gulp-data');
 const revReplace = require('gulp-rev-replace');
 const path = require('path');
+
+// TODO accept options.helpers from project
+const helpers = require('./helpers');
 
 const i18nUtils = require('./i18n');
 
@@ -13,15 +18,6 @@ function requireUncached( requiredModule ) {
 }
 
 module.exports = function (gulp, options) {
-
-  /**
-    To be extended to accept options.hbsHelpers
-  */
-  const helpers = {
-    json : function(context){
-      return JSON.stringify(context);
-    }
-  };
 
   gulp.task('tmp-replace', function () {
     const manifest = gulp.src('./build/rev-manifest.json');
